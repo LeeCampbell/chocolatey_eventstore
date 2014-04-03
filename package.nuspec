@@ -3,7 +3,7 @@
   <metadata>
     <id>eventstore</id>
     <title>eventstore</title>
-    <version>3.0.0.0</version>
+    <version>3.0.0.2</version>
     <authors>owain perry</authors>
     <owners>geteventstore</owners>
     <summary>eventstore</summary>

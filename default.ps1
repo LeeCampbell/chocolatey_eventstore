@@ -1,33 +1,58 @@
 properties {
 	#If you want to inc the version number 
-	$buildNumber = $env:build
+	$buildNumber = $env:BUILD_NUMBER
   	if($buildNumber -eq $null)
   	{
     	$buildNumber = "1"
   	}    	
-		
+	
+    $version = 	
 	#Should not need to change these 
 	
 	$chocolateyInstallPath = "http://bit.ly/psChocInstall"
 	$chocolateyPath = "c:\chocolatey"
 	$chocolateySource ="http://192.168.20.25:1337/nuget/Packages" 
 	$apiKey = "pkgs"
+    $global:versionNumberToBeUsed = $version
 }
 
 #task default -depends  Clean, WriteNuspecFile, SetVersion, Pack
-task default -depends  Clean, InstallChocolatey, WriteNuspecFile, Pack, Push
+task default -depends  Clean, InstallChocolatey, InitVersionNumber, WriteNuspecFile, Pack, Push
 
-task WriteNuspecFile {	
-	 $file = @(Get-Item *.nuspec)[0]
-	 $x = [xml] (Get-Content $file)	    
-	 $x.package.metadata.id = $id
-	 $x.package.metadata.version = $version
-     $x.package.metadata.title = $title 
-	 $x.package.metadata.authors = $authors
-	 $x.package.metadata.summary = $summary
-	 $x.package.metadata.tags = $tags	 
-	 $x.Save($file)		 
+task InitVersionNumber {
+    
+    $buildNumber = $env:BUILD_NUMBER
+    if($buildNumber -eq $null)
+    {
+       $version = "1.0.0.0"
+    }
+    else 
+    {
+        $version = Get-Content .\package.properties
+        $version = $version -replace "version=", ""                  
+        $versionParts= $version.split(".")
+        if($buildNumber -ne $null)
+        {
+           $versionParts[3]=$buildNumber
+           $global:versionNumberToBeUsed = "$($versionParts[0]).$($versionParts[1]).$($versionParts[2]).$($versionParts[3])"
+         }
+    }
+
 }
+
+
+task WriteNuspecFile {  
+     $file = @(Get-Item *.nuspec)[0]
+     $x = [xml] (Get-Content $file)     
+     $x.package.metadata.id = $id
+     $x.package.metadata.version = $versionNumberToBeUsed
+     $x.package.metadata.title = $title 
+     $x.package.metadata.authors = $authors
+     $x.package.metadata.summary = $summary
+     $x.package.metadata.tags = $tags    
+     $x.Save($file)      
+}
+
 
 task Clean {
   rmdir -Force *.nupkg;
