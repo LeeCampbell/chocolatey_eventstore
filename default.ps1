@@ -1,6 +1,7 @@
 properties {
 	#If you want to inc the version number 
-	$buildNumber = $env:BUILD_NUMBER
+	$packageName = "eventstore"
+    $buildNumber = $env:BUILD_NUMBER
   	if($buildNumber -eq $null)
   	{
     	$buildNumber = "1"
@@ -13,7 +14,8 @@ properties {
 	$chocolateyPath = "c:\chocolatey"
 	$chocolateySource ="http://192.168.20.25:1337/nuget/Packages" 
 	$apiKey = "pkgs"
-    $global:versionNumberToBeUsed = $version
+    $global:versionNumberToBeUsed = $version    
+    $id = "$packageName"             
 }
 
 #task default -depends  Clean, WriteNuspecFile, SetVersion, Pack
