@@ -71,8 +71,8 @@ task Pack {
 }
 
 task Push {	
-	$IsGo = Test-Path -path Env:\GO_PIPELINE_LABEL
-	if ($IsGo -eq $true)
+	$IsTC = Test-Path -path Env:\TEAMCITY_VERSION
+	if ($IsTC -eq $true)
 	{
 		Write-Host "Setting api key"
 		& "$chocolateyPath\chocolateyinstall\NuGet.exe" setApiKey "$apiKey"  -Source "$chocolateySource"	
