@@ -1,0 +1,7 @@
+*.nupkg
+temp/
+nuget.exe
+obj/
+bin/
+packages/
+*.suo

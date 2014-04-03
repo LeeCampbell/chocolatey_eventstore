@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>eventstore</id>
+    <title>eventstore</title>
+    <version>3.0.0.0</version>
+    <authors>owain perry</authors>
+    <owners>geteventstore</owners>
+    <summary>eventstore</summary>
+    <description>event store windows .net version with windows service wrapper</description>
+    <projectUrl>http://www.geteventstore.com</projectUrl>
+    <tags>eventstore</tags>
+    <copyright>
+    </copyright>
+    <licenseUrl>http://www.geteventstore.com</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>
+    </releaseNotes>
+    <dependencies>
+      <dependency id="NSSM" version="2.21.1.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
