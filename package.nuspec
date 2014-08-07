@@ -3,7 +3,7 @@
   <metadata>
     <id>eventstore</id>
     <title>eventstore</title>
-    <version>3.0.0.2</version>
+    <version>3.0.0.3</version>
     <authors>owain perry</authors>
     <owners>geteventstore</owners>
     <summary>eventstore</summary>
@@ -15,12 +15,10 @@
     <licenseUrl>http://www.geteventstore.com</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes>
-    </releaseNotes>
-    <dependencies>
-      <dependency id="NSSM" version="2.21.1.0" />
-    </dependencies>
+    </releaseNotes>   
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
+    <file src="data\**" target="data" />
   </files>
 </package>
